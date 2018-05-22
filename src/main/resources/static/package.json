@@ -1,0 +1,29 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "dependencies": {
+  },
+
+  "devDependencies": {
+    "http-server": "latest",
+    "livereload": "latest"
+  },
+  "scripts": {
+    "start": "node_modules/.bin/http-server -c-1 > /dev/null & node_modules/.bin/livereload . -i 200 > /dev/null"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.diinf.usach.cl/nicolas.callahan/Tingeso-Front-End"
+  },
+
+  "keywords": [
+  ],
+  "author": "Grupo2",
+  "license": "",
+  "bugs": {
+    "url": "https://gitlab.diinf.usach.cl/nicolas.callahan/Tingeso-Front-End/issues"
+  },
+  "homepage": "https://gitlab.diinf.usach.cl/nicolas.callahan/Tingeso-Front-End"
+}

@@ -1,0 +1,116 @@
+<style>
+		textarea {
+		resize: none;
+	}
+</style>
+
+<div class="container">
+	  <div class="codeAll mx-auto mt-6" ng-hide="saveOk">
+      <div id="dialogoverlay"></div>
+  <div id="dialogbox">
+    <div>
+      <div id="dialogboxhead"></div>
+      <div id="dialogboxbody"></div>
+      <div id="dialogboxfoot"></div>
+    </div>
+  </div> 
+	<div class="card card-register mx-auto mt-5" ng-hide="saveOk">
+		<div class="card-header">Subir un enunciado</div>
+   	 	<div class="card-body">
+			<form ng-model="sectionForm" id="sectionForm" name="sectionForm" ng-submit="createStatement()" novalidate>
+				<table>
+					<tr>
+						<th><label>Título del enunciado:</label></th>
+					</tr>
+					<tr>
+						<td><input type="text" name="title_statement" required maxlength=60 style='width:100%' placeholder="Ingrese un título" ng-model="titleStatement"><br></td>
+					</tr>
+					
+
+					<tr>
+						<th><label>Escriba el enunciado:</label></th>
+					</tr>
+					
+					<tr>
+						<td><textarea  ng-model="textArea" id="text_statement" cols="60" rows="20" maxlength ="1000" placeholder="Ingrese el enunciado"></textarea></td> 
+					</tr>
+
+					<tr>
+						<th><label>Entrada:</label></th>
+					</tr>
+					<tr>
+						<td><input type="text" ng-model="inputStatement" required maxlength=60 style='width:100%' placeholder="Ingrese una entrada para la prueba (opcional)"><br></td>
+					</tr>
+					
+					<tr>
+						<th><label>Escriba una solución:</label></th>
+					</tr>
+					
+					<tr>
+						<td><input type="text" ng-model="solutionStatement" required maxlength=60 style='width:100%' placeholder="Ingrese una solución"><br></td> 
+					</tr>
+
+				</table>
+				<hr>
+				<input class="btn btn-primary btn-block" type="submit" value="Subir enunciado">
+			</form>
+		</div>
+	</div>
+</div> 
+
+
+<script>
+	function CustomAlert(){
+    var aux="";
+    this.render = function(dialog){
+        var winW = window.innerWidth;
+        var winH = window.innerHeight;
+        var dialogoverlay = document.getElementById('dialogoverlay');
+        var dialogbox = document.getElementById('dialogbox');
+        dialogoverlay.style.display = "block";
+        dialogoverlay.style.height = winH+"px";
+        dialogbox.style.left = (winW/2) - (550 * .5)+"px";
+        dialogbox.style.top = "100px";
+        dialogbox.style.display = "block";
+        aux=dialog;
+        document.getElementById('dialogboxhead').innerHTML = "AVISO:";
+        document.getElementById('dialogboxbody').innerHTML = dialog;
+        document.getElementById('dialogboxfoot').innerHTML = '<button onclick="Alert.ok()">Entendido!</button>';
+    }
+    this.ok = function(){
+      document.getElementById('dialogbox').style.display = "none";
+      document.getElementById('dialogoverlay').style.display = "none";
+      var aux1 = aux.localeCompare("¡¡Enunciado grabado con exito!!");
+      console.log(aux1+"aaa");
+      if (aux1==0) {
+        document.location.href = "http://localhost:2323/#!/dashboard";
+       }
+    }
+  }
+  var Alert = new CustomAlert();
+</script>
+
+<style>
+#dialogoverlay{
+  display: none;
+  opacity: .8;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background: #FFF;
+  width: 100%;
+  z-index: 10;
+}
+#dialogbox{
+  display: none;
+  position: fixed;
+  background: #000;
+  border-radius:7px; 
+  width:550px;
+  z-index: 10;
+}
+#dialogbox > div{ background:#FFF; margin:8px; }
+#dialogbox > div > #dialogboxhead{ background: #666; font-size:19px; padding:10px; color:#CCC; }
+#dialogbox > div > #dialogboxbody{ background:#333; padding:20px; color:#FFF; }
+#dialogbox > div > #dialogboxfoot{ background: #666; padding:10px; text-align:right; }
+</style>

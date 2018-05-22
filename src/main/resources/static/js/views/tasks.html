@@ -1,0 +1,23 @@
+  <h2> Tareas realizadas </h2>
+  <hr>
+  <div>
+    <div id="student-table">
+      <table width="100%" class="table table-striped table-bordered table-hover">
+        <thead>
+          <th>Id código</th>
+          <th>Título enunciado</th>
+          <th>Ver</th>
+        </thead>
+        <tr>
+        <!-- tr ng-repeat="code in codes | startFrom:(currentPage - 1) * pageSize| limitTo:pageSize"-->
+          <td>{{code.idCode}}</td>
+          <td>{{code.idStatement}}</td>
+          <td><input class="btn btn-primary btn-block" type="button" onclick = "location.href='/#!/seeStatement'" value="Ver"></td>
+        </tr>
+      </table>
+    </div>
+    <!--ul uib-pagination total-items="statements.length" ng-model="currentPage" ng-change="pageChanged()"-->
+    <ul>
+    </ul>
+  </div>
+

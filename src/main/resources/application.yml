@@ -1,0 +1,31 @@
+spring:
+    jpa:
+        database: MYSQL
+        hibernate:
+            ddl-auto: validate
+
+    datasource:
+        url: jdbc:mysql://138.197.162.25:3306/grupo2
+        username: grupo2
+        password: nicolas.callahan
+        driver-class-name: com.mysql.jdbc.Driver
+
+server:
+    port: 2323
+
+security:
+  oauth2:
+    client:
+      clientId: 310328914784-5t6272q3gocmlkotvo9mfqkqhlk6i81t.apps.googleusercontent.com
+      clientSecret: AlPdJ8CD43z5QcxQkGsJrRsP
+      redirectUri: http://localhost:2323
+      accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      clientAuthenticationScheme: form
+      scope:
+        - openid
+        - email
+        - profile
+    resource:
+      userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+      preferTokenInfo: true

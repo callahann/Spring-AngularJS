@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="grupo2_mingeso_2s2017">
+		<class>edu.usach.grupo2mingeso2s2017.entities.Code</class>
+		<class>edu.usach.grupo2mingeso2s2017.entities.Record</class>
+		<class>edu.usach.grupo2mingeso2s2017.entities.Section</class>
+		<class>edu.usach.grupo2mingeso2s2017.entities.Statement</class>
+		<class>edu.usach.grupo2mingeso2s2017.entities.Student</class>
+		<class>edu.usach.grupo2mingeso2s2017.entities.Teacher</class>
+	</persistence-unit>
+</persistence>

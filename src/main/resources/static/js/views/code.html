@@ -1,0 +1,72 @@
+<div class="container"> 
+  <div class="codeAll mx-auto mt-6" ng-hide="saveOk">
+    <div class="card-body">
+        <label id="tituloEnunciado"><h3>Enunciado:{{aqui va el titulo}}</h3></label>
+        <p id="cuerpoEnunciado"><h4>Aqui va el detalle del enunciado</h4></p>
+    </div>
+    <div>
+      <form>
+        <div class="codeInput mx-auto mt-6" >      
+          <h3>Escriba su solución</h3> 
+          <form>
+            <p id="yourcode" style=" border-radius: 5px 5px 5px 5px; border: 10px double #272822"></p>
+            <br/> 
+            <button type="button" style="margin-left: 7%; font-size: 16px; width: 20%;border-radius: 8px; " onclick="runit()">Probar</button> 
+          </form> 
+          <br/>
+        </div>
+        <div class="codeOut mx-auto mt-6">
+          <br/>
+          <pre id="output" style="background: #373831; color: #f8f8f2; border-radius: 5px 5px 5px 5px; border: 10px double #f8f8f2">  </pre> 
+        </div>
+        <div>
+          <br/>
+          <button type="submit" style="position:absolute; right: 15%; width: 50%; border-radius: 8px;" href="http://localhost:2323/statements" onclick="runit()">Enviar Respuesta</button> 
+        </div>
+          <br/>
+          <br/>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript"> 
+  // output functions are configurable.  This one just appends some text
+  // to a pre element.
+  function outf(text) { 
+      var mypre = document.getElementById("output"); 
+      mypre.innerHTML = mypre.innerHTML + text; 
+  }
+  function builtinRead(x) {
+      if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+              throw "File not found: '" + x + "'";
+      return Sk.builtinFiles["files"][x];
+  }
+  function runit() { 
+     var prog = myCodeMirror.getValue(); 
+     var mypre = document.getElementById("output"); 
+     mypre.innerHTML = ''; 
+     Sk.canvas = "mycanvas";
+     Sk.pre = "output";
+     Sk.configure({output:outf, read:builtinRead}); 
+     try {
+        eval(Sk.importMainWithBody("<stdin>",false,prog)); 
+     }
+     catch(e) {
+         alert(e.toString())
+     }
+  } 
+</script> 
+<script> 
+  var myCodeMirror = CodeMirror(document.getElementById("yourcode"), {
+    value: "print 2+5",
+    mode: "javascript",
+    keyMap: "sublime",
+    lineNumbers: true,
+    autoCloseBrackets: true,
+    matchBrackets: true,
+    showCursorWhenSelecting: true,
+    theme: "monokai",
+    tabSize: 2
+  });
+</script>

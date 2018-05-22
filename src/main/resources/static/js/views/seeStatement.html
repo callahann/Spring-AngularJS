@@ -1,0 +1,139 @@
+<div class="container"> 
+  <div class="codeAll mx-auto mt-6" ng-hide="saveOk">
+      <div id="dialogoverlay"></div>
+  <div id="dialogbox">
+    <div>
+      <div id="dialogboxhead"></div>
+      <div id="dialogboxbody"></div>
+      <div id="dialogboxfoot"></div>
+    </div>
+  </div> 
+  <div class="card card-register mx-auto mt-6" id="idStatment" ng-hide="saveOk" >
+      <table>
+        <tr><th>Título:</th></tr>
+        <tr><td>{{statement.title}}</td></tr>
+        <tr><th>Fecha de publicación:</th></tr>
+        <tr><td>{{statement.date}}</td></tr>
+        <tr><th>Detalle:</th></tr>
+        <tr><td>{{statement.statementText}}</td></tr>
+        <tr><th>Considere estos datos de prueba:</th></tr>
+        <tr><td>{{statement.input}}</td></tr>
+      </table>
+  </div> 
+  <hr>
+    <div class="codeAll mx-auto mt-6" ng-hide="saveOk">
+      <div>
+          <div class="codeInput mx-auto mt-6" >      
+            <h3>Escriba su solución</h3> 
+              <pre id="yourcode" style=" border-radius: 5px 5px 5px 5px; border: 10px double #272822"></pre>
+              <br/> 
+              <button type="button" style="margin-left: 7%; font-size: 16px; width: 20%; border-radius: 8px; " onclick="runit()">Probar</button>
+            <br/>
+          </div>
+          <div class="codeOut mx-auto mt-6">
+            <br/>
+            <pre id="output" scrolling="yes" style="height: 150px; background: #373831; color: #f8f8f2; border-radius: 5px 5px 5px 5px; border: 10px double #f8f8f2"> {{out}}</pre>
+          </div>
+          <div>
+            <br/>
+            <input type="button" class="btn btn-primary" style="position:absolute; right: 15%; width: 50%; border-radius: 8px;" value="Enviar Respuesta" href="#!/statements" ng-click="compare()">
+          </div>
+          <br/>
+          <br/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript"> 
+  // output functions are configurable.  This one just appends some text
+  // to a pre element.
+  function outf(text) { 
+      var mypre = document.getElementById("output"); 
+      mypre.innerHTML = mypre.innerHTML + text; 
+  }
+  function builtinRead(x) {
+      if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+              throw "File not found: '" + x + "'";
+      return Sk.builtinFiles["files"][x];
+  }
+  function runit() { 
+     var prog = myCodeMirror.getValue();
+     var mypre = document.getElementById("output"); 
+     mypre.innerHTML = ''; 
+     Sk.canvas = "mycanvas";
+     Sk.pre = "output";
+     Sk.configure({output:outf, read:builtinRead}); 
+     try {
+        eval(Sk.importMainWithBody("<stdin>",false,prog)); 
+     }
+     catch(e) {
+        Alert.render(e.toString().split(":")[1]);
+     }
+     //console.log(output.innerHTML);
+  }  
+  var myCodeMirror = CodeMirror(document.getElementById("yourcode"), {
+    value: "//ingresa aqui tu codigo",
+    mode: "javascript",
+    keyMap: "sublime",
+    lineNumbers: true,
+    autoCloseBrackets: true,
+    matchBrackets: true,
+    showCursorWhenSelecting: true,
+    theme: "monokai",
+    tabSize: 2
+  });
+
+  function CustomAlert(){
+    var aux="";
+    this.render = function(dialog){
+        var winW = window.innerWidth;
+        var winH = window.innerHeight;
+        var dialogoverlay = document.getElementById('dialogoverlay');
+        var dialogbox = document.getElementById('dialogbox');
+        dialogoverlay.style.display = "block";
+        dialogoverlay.style.height = winH+"px";
+        dialogbox.style.left = (winW/2) - (550 * .5)+"px";
+        dialogbox.style.top = "100px";
+        dialogbox.style.display = "block";
+        aux=dialog;
+        document.getElementById('dialogboxhead').innerHTML = "AVISO:";
+        document.getElementById('dialogboxbody').innerHTML = dialog;
+        document.getElementById('dialogboxfoot').innerHTML = '<button onclick="Alert.ok()">Entendido!</button>';
+    }
+    this.ok = function(){
+      document.getElementById('dialogbox').style.display = "none";
+      document.getElementById('dialogoverlay').style.display = "none";
+      var aux1 = aux.localeCompare("respuesta enviada");
+      if (aux1==0) {
+        document.location.href = "http://localhost:2323/#!/statements";
+       }
+    }
+  }
+  var Alert = new CustomAlert();
+</script>
+
+<style>
+#dialogoverlay{
+  display: none;
+  opacity: .8;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background: #FFF;
+  width: 100%;
+  z-index: 10;
+}
+#dialogbox{
+  display: none;
+  position: fixed;
+  background: #000;
+  border-radius:7px; 
+  width:550px;
+  z-index: 10;
+}
+#dialogbox > div{ background:#FFF; margin:8px; }
+#dialogbox > div > #dialogboxhead{ background: #666; font-size:19px; padding:10px; color:#CCC; }
+#dialogbox > div > #dialogboxbody{ background:#333; padding:20px; color:#FFF; }
+#dialogbox > div > #dialogboxfoot{ background: #666; padding:10px; text-align:right; }
+</style>

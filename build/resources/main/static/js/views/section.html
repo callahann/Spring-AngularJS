@@ -1,0 +1,31 @@
+<div class="container">
+<div class="card card-register mx-auto mt-5">
+	<div class="card-header">Agregar una sección</div>
+    <div class="card-body">
+		<form ng-model="sectionForm" id="sectionForm" name="sectionForm" ng-submit="createSection()" novalidate ng-hide="saveOk">
+			<label>Código de la sección nueva:</label>
+			<input type="text" ng-model="code" required />
+			<div ng-show="!code && sectionForm.$submitted" class="alert alert-warning"> Debes ingresar un código</div>
+			<br>
+			<br>
+			<label> Profesor de la nueva seccion:</label>
+
+			<select ng-model="teacherSelect" ng-options="teacher as teacher.name + ' '  + teacher.lastName for teacher in teachers">
+				<option value="">-- seleccione un profesor --</option>
+			</select>
+
+	    	<div ng-show="!teacherSelect && sectionForm.$submitted" class="alert alert-warning"> Debes seleccionar un profesor</div>
+			<br>
+			<hr>
+			<input class="btn btn-primary btn-block" type="submit" value="Agregar Sección">
+			</form>
+
+			<div ng-show="saveOk" class="well">
+			<h3> ¡ Sección creada con exito !</h3>
+			<h4>Código sección:{{code}}</h4>
+			<h4>Profesor a cargo: {{teacherSelect.name}} {{teacherSelect.lastName}}</h4>
+			<input class="btn" type="button" value="Agregar Sección" ng-click="exit()">
+			</div>
+		</div>
+	</div>
+</div>

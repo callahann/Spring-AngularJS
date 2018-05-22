@@ -1,0 +1,61 @@
+	<style>
+		textarea {
+		resize: none;
+	}
+</style>
+
+<div class="container">
+	<div class="card card-register mx-auto mt-5" ng-hide="saveOk">
+		<div class="card-header">Subir un enunciado</div>
+   	 	<div class="card-body">
+			<form ng-model="sectionForm" id="sectionForm" name="sectionForm" ng-submit="createStatement()" novalidate>
+				<table>
+					<tr>
+						<th><label>Título del enunciado:</label></th>
+					</tr>
+					<tr>
+						<td><input type="text" name="title_statement" required maxlength=60 style='width:100%' placeholder="Ingrese un título" ng-model="titleStatement"><br></td>
+					</tr>
+					
+
+					<tr>
+						<th><label>Escriba el enunciado:</label></th>
+					</tr>
+					
+					<tr>
+						<td><textarea  ng-model="textArea" id="text_statement" cols="60" rows="20" maxlength ="1000" placeholder="Ingrese el enunciado"></textarea></td> 
+					</tr>
+
+					<tr>
+						<th><label>Entrada:</label></th>
+					</tr>
+					<tr>
+						<td><input type="text" ng-model="inputStatement" required maxlength=60 style='width:100%' placeholder="Ingrese una entrada para la prueba (opcional)"><br></td>
+					</tr>
+					
+					<tr>
+						<th><label>Escriba una solución:</label></th>
+					</tr>
+					
+					<tr>
+						<td><input type="text" ng-model="solutionStatement" required maxlength=60 style='width:100%' placeholder="Ingrese una solución"><br></td> 
+					</tr>
+
+				</table>
+				<hr>
+				<input class="btn btn-primary btn-block" type="submit" value="Subir enunciado">
+			</form>
+		</div>
+	</div>
+
+	<div class="card card-register mx-auto mt-5" ng-show="saveOk">
+		<div class="card-header">Subir enunciado</div>
+   	 	<div class="card-body">
+			<div ng-show="saveOk" class="well">
+				<h3> ¡ Enunciado subido con éxito !</h3>
+				<input class="btn btn-primary btn-block" type="button" value="Volver" ng-click="exit()">
+			</div>
+		</div>
+	</div>
+
+</div> 

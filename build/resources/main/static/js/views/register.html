@@ -1,0 +1,60 @@
+
+  <div class="container"> 
+    <div class="card card-register mx-auto mt-5" ng-hide="saveOk">
+      <div class="card-header">
+      Registrar un
+      <select ng-model="registerSelect" ng-options="option as option.text for option in options" ng-change="showOptions()"></select> 
+      </div>
+      <div class="card-body">
+        <form ng-model="registerForm" id="registerForm" name="registerForm" ng-submit="saveRegister()" novalidate>
+          <div class="form-group">
+              <label for="exampleInputName">Nombre</label>
+              <input ng-model="registerName" class="form-control" id="registerName" name="registerName" type="text" aria-describedby="nameHelp" placeholder="Ingresar nombre">
+              <div ng-show="!registerName && registerForm.$submitted" class="alert alert-warning"> Debes ingresar un nombre</div>
+              <br>
+
+              <label for="exampleInputLastName">Apellido</label>
+              <input ng-model="registerLastName" class="form-control" id="registerLastName" name="registerLastName" type="text" aria-describedby="nameHelp" placeholder="Ingresar apellido">
+              <div ng-show="!registerLastName && registerForm.$submitted" class="alert alert-warning"> Debes ingresar un apellido</div>
+              <br>
+
+              <label for="exampleInputEmail1">Correo Usach</label>
+              <input ng-model="registerEmail" class="form-control" id="registerEmail" name="registerEmail" type="email" aria-describedby="emailHelp" placeholder="Ingresar correo">
+              <div ng-show="!registerEmail && registerForm.$submitted" class="alert alert-warning"> Debes ingresar un email</div>
+              <br>
+
+              <div class=form-group ng-show="studentView">
+                <label>Sección</label>
+                <br>
+                <select ng-model="registerSection" ng-options="section as section.sectionCode for section in sections">
+                  <option value="">--Seleccione un código--</option>
+                </select>
+                <div ng-show="!registerSection && registerForm.$submitted" class="alert alert-warning"> Debes ingresar un código</div>
+              </div>
+
+              <div class=form-group ng-hide="studentView">
+                <label>Coordinador </label>
+                <input ng-model="registerCoordinator" type="checkbox">
+              </div>
+              
+          </div>
+          <input class="btn btn-primary btn-block" type="submit" value="Registrar {{registerSelect.text}}">
+        </form>
+      </div>
+    </div>
+
+    <div class="card card-register mx-auto mt-5" ng-show="saveOk">
+      <div class="card-header">Subir enunciado</div>
+        <div class="card-body">
+        <div ng-show="saveOk" class="well">
+        <h3> ¡ {{registerSelect.text}} creado con éxito !</h3>
+        <h4>Nombre: {{registerName}}</h4>
+        <h4>Apellido: {{registerLastName}}</h4>
+        <input class="btn btn-primary btn-block" type="button" value="Volver" ng-click="exit()">
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+

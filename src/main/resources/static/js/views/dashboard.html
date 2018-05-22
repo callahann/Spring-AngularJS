@@ -1,0 +1,34 @@
+<div class="container"> 
+<div class="card card-register mx-auto mt-5">
+    <div class="card-header">Ver estadisticas</div>
+    <div class="card-body">
+    <form ng-model="stadisticForm" id="stadisticForm" name="stadisticForm" ng-submit="showCode()" novalidate>
+        seccion
+        <select ng-model="sectionSelect" ng-options="section as section.sectionCode for section in sections" ng-show="coordinatorOK">
+            <option value="">Seleccione seccion</option>
+        </select>
+        <label ng-model="section" ng-hide="coordinatorOK" style= "border-style: ridge; border-width: medium; border-color: black;">{{section[0].sectionCode}}</label> 
+        Estudiante
+        <select ng-model="studentSelect" ng-options="student as student.name + ' ' + student.lastName for student in students">
+            <option value="">seleccione estudiante</option>
+        </select>
+        <br><br>
+
+        <div class="form-group">
+            <table width="100%" class="table table-striped table-bordered table-hover">
+            <thead>
+                <th>statement</th>
+                <th width="25%">Ver</th>
+            </thead>
+                        
+            <tr ng-repeat="statement in statements | startFrom:(currentPage - 1) * pageSize| limitTo:pageSize">
+                <td>{{statement.statementText}}</td>
+                <td><a class="button btn btn-primary" href="#!/seeStatement/{{statement.idStatement}}">Ver</a></td>
+            </tr>
+            </table>
+        </div>
+    </form>
+    </div>
+</div>
+</div>
+    
